@@ -12,10 +12,6 @@ public class WelcomeController {
 
     @FXML
     private Button startGameButton;
-
-    @FXML
-    private Button exitButton;
-
     @FXML
     private void startGame() {
         try {
