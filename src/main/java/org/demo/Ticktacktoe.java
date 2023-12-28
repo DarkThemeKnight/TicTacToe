@@ -1,6 +1,5 @@
 package org.demo;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -12,8 +11,27 @@ public class Ticktacktoe {
     private String[] board = new String[9];
     private final String PLAYER1 = "X";
     private final String PLAYER2 = "O";
-    private Scanner sc = new Scanner(System.in);
-    Map<String,Integer> playerMap = new HashMap<>(Map.of(PLAYER2,2,PLAYER1,1));
+    private Scanner sc;
+    private Map<String,Integer> playerMap = new HashMap<>(Map.of(PLAYER2,2,PLAYER1,1));
+
+    public Map<String, Integer> getPlayerMap() {
+        return playerMap;
+    }
+    public String[] getBoard() {
+        return board;
+    }
+
+    public void setBoard(String[] board) {
+        this.board = board;
+    }
+
+    public String getPLAYER1() {
+        return PLAYER1;
+    }
+
+    public String getPLAYER2() {
+        return PLAYER2;
+    }
 
     public Consumer<Void> initialize = (unused)->{
         board = new String[9];
@@ -55,6 +73,14 @@ public class Ticktacktoe {
         }
         return true;
     };
+    public BiFunction<Integer,Integer,Integer> parsePosition = (r,c)->
+    {
+        if (r > 2 || r < 0 || c < 0 || c > 2){
+            return  -1;
+        }
+        return r * 3 + c;
+    };
+
     public void printBoard() {
         System.out.println("-------------");
         for (int i = 0; i < 9; i += 3) {
@@ -66,6 +92,7 @@ public class Ticktacktoe {
         }
     }
     public boolean playGameCommandLine(){
+        sc = new Scanner(System.in);
         initialize.accept(null);
         boolean stoppingConditionIsMet = false;
         int player = 0;
@@ -128,13 +155,6 @@ public class Ticktacktoe {
          sc.close();
         return requestRematch();
     }
-    BiFunction<Integer,Integer,Integer> parsePosition = (r,c)->
-    {
-        if (r > 2 || r < 0 || c < 0 || c > 2){
-            return  -1;
-        }
-        return r * 3 + c;
-    };
     private boolean requestRematch(){
         sc = new Scanner(System.in);
         System.out.println("Rematch ?\nA.Yes\tB.No");
