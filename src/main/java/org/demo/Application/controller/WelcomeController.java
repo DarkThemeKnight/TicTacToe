@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class WelcomeController {
-
     @FXML
     private Button startGameButton;
     @FXML
@@ -17,23 +16,15 @@ public class WelcomeController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/GameBoard.fxml"));
             Parent root = loader.load();
-
-            // Get the controller instance
             GameBoard gameBoardController = loader.getController();
-
-            // You can perform any initialization or setup on the controller if needed
-            // gameBoardController.initialize();
-
-            // Set up the stage
-            Stage stage = (Stage) startGameButton.getScene().getWindow(); // Assuming startGameButton is a button in your welcome.fxml
+            gameBoardController.initialize();
+            Stage stage = (Stage) startGameButton.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
-            // Handle any potential IOExceptions
         }
     }
-
     @FXML
     private void exitGame() {
         System.exit(0);

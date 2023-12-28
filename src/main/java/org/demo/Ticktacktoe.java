@@ -12,18 +12,7 @@ public class Ticktacktoe {
     private final String PLAYER1 = "X";
     private final String PLAYER2 = "O";
     private Scanner sc;
-    private Map<String,Integer> playerMap = new HashMap<>(Map.of(PLAYER2,2,PLAYER1,1));
-
-    public Map<String, Integer> getPlayerMap() {
-        return playerMap;
-    }
-    public String[] getBoard() {
-        return board;
-    }
-
-    public void setBoard(String[] board) {
-        this.board = board;
-    }
+    private final Map<String,Integer> playerMap = new HashMap<>(Map.of(PLAYER2,2,PLAYER1,1));
 
     public String getPLAYER1() {
         return PLAYER1;
@@ -33,9 +22,7 @@ public class Ticktacktoe {
         return PLAYER2;
     }
 
-    public Consumer<Void> initialize = (unused)->{
-        board = new String[9];
-    };
+    public Consumer<Void> initialize = unused -> board = new String[9];
     public BiFunction<Integer,String, Boolean> play  = (position,value) -> {
         if (board[position] != null){
             return false;
@@ -43,7 +30,6 @@ public class Ticktacktoe {
         board[position] = value;
         return true;
     };
-
     public Predicate<Void> checkWin = unused -> {
         // Check rows for a win
         for (int i = 0; i < 9; i += 3) {
@@ -98,7 +84,7 @@ public class Ticktacktoe {
         int player = 0;
          while (!stoppingConditionIsMet){
             printBoard();
-            String currentPlayer = null;
+            String currentPlayer;
             if (player % 2 == 0){ // player 1
                 System.out.println("Player One's Turn\n");
                 currentPlayer = PLAYER1;

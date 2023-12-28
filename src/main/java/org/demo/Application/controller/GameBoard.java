@@ -15,8 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
-
 public class GameBoard {
     Ticktacktoe ticktacktoe = new Ticktacktoe();
     @FXML
@@ -57,7 +55,7 @@ public class GameBoard {
         positionMap.put(cell20, 6);
         positionMap.put(cell21, 7);
         positionMap.put(cell22, 8);
-        positionMap.keySet().stream().forEach(button -> {
+        positionMap.keySet().forEach(button -> {
             button.setText(null);
             button.setDisable(false);
         });
@@ -94,7 +92,7 @@ public class GameBoard {
         if (gameCompleted){
             Set<Button> buttons = positionMap.keySet();
             List<Button>buttonsFiltered = buttons.stream().filter(button -> positionMap.get(button) != 1000 && positionMap.get(button) != -1000).toList();
-            buttonsFiltered.stream().forEach(button -> button.setDisable(true));
+            buttonsFiltered.forEach(button -> button.setDisable(true));
         }
     }
     private void changePlayer(){
